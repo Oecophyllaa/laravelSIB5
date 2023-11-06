@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JenisProdukController;
+use App\Http\Controllers\KartuController;
 use App\Http\Controllers\LihatNilaiController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,3 +50,9 @@ Route::get('/datamahasiswa', [LihatNilaiController::class, 'dataMahasiswa']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::get('/404', [PageController::class, 'index'])->name('page.notfound');
+
+// memanggil seluruh fungsi atau function menggunakan resource
+Route::resource('jenis-produk', JenisProdukController::class);
+Route::resource('kartu', KartuController::class);
+Route::resource('produk', ProdukController::class);
+Route::resource('pelanggan', PelangganController::class);

@@ -121,3 +121,9 @@
     </div>
   </div>
 @endpush
+
+@push('after-script')
+  <!-- Page level custom scripts -->
+  <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
+  <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
+@endpush
