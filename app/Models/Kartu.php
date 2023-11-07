@@ -20,6 +20,6 @@ class Kartu extends Model
 
 	public function pelanggan()
 	{
-		return $this->hasMany(Pelanggan::class);
+		return $this->hasOne(Pelanggan::class);
 	}
 }

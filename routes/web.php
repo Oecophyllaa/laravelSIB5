@@ -46,13 +46,20 @@ Route::get('/daftarnilai', function () {
 	return view('coba.daftar');
 });
 
+// routing manggil dari class controller
 Route::get('/datamahasiswa', [LihatNilaiController::class, 'dataMahasiswa']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/404', [PageController::class, 'index'])->name('page.notfound');
+Route::prefix('admin')->group(function () {
+	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-// memanggil seluruh fungsi atau function menggunakan resource
-Route::resource('jenis-produk', JenisProdukController::class);
-Route::resource('kartu', KartuController::class);
-Route::resource('produk', ProdukController::class);
-Route::resource('pelanggan', PelangganController::class);
+	// contoh pemanggilan secara satu persatu function menggunakan get, put, update, delete
+	Route::get('/404', [PageController::class, 'index'])->name('page.notfound');
+
+	// memanggil seluruh fungsi atau function menggunakan resource
+	Route::resource('kartu', KartuController::class);
+
+	// memanggil fungsi satu persatu
+	Route::get('/jenis-produk', [JenisProdukController::class, 'index']);
+	Route::get('/produk', [ProdukController::class, 'index']);
+	Route::resource('pelanggan', PelangganController::class);
+});

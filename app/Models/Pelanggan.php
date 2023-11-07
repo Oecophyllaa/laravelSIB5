@@ -23,6 +23,6 @@ class Pelanggan extends Model
 
 	public function kartu()
 	{
-		return $this->hasOne(Kartu::class, 'kartu_id');
+		return $this->belongsTo(Kartu::class);
 	}
 }
