@@ -36,7 +36,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Kumpulan Data:</h6>
         <a class="collapse-item" href="{{ url('admin/produk') }}">Data Produk</a>
-        <a class="collapse-item" href="#">Data Pelanggan</a>
+        <a class="collapse-item" href="{{ route('pelanggan.index') }}">Data Pelanggan</a>
         <a class="collapse-item" href="/admin/jenis-produk">Data Jenis Produk</a>
         <a class="collapse-item" href="{{ route('kartu.index') }}">Data Kartu</a>
       </div>

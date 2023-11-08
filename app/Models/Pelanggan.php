@@ -21,6 +21,8 @@ class Pelanggan extends Model
 		'kartu_id',
 	];
 
+	public $timestamps = false;
+
 	public function kartu()
 	{
 		return $this->belongsTo(Kartu::class);

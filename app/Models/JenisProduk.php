@@ -17,6 +17,8 @@ class JenisProduk extends Model
 		'nama',
 	];
 
+	public $timestamps = false;
+
 	// relasi antara table
 	public function produk()
 	{
