@@ -62,11 +62,16 @@ Route::prefix('admin')->group(function () {
 	Route::get('/jenis-produk', [JenisProdukController::class, 'index']);
 	Route::get('/jenis-produk/create', [JenisProdukController::class, 'create']);
 	Route::post('/jenis-produk/store', [JenisProdukController::class, 'store']);
+	Route::get('/jenis-produk/edit/{id}', [JenisProdukController::class, 'edit']);
+	Route::post('/jenis-produk/update/{id}', [JenisProdukController::class, 'update']);
 
 	Route::get('/produk', [ProdukController::class, 'index']);
 	Route::get('/produk/create', [ProdukController::class, 'create']);
 	Route::post('/produk/store', [ProdukController::class, 'store']);
 	Route::get('/produk/show/{id}', [ProdukController::class, 'show']);
+	Route::get('/produk/edit/{id}', [ProdukController::class, 'edit']);
+	Route::post('/produk/update/{id}', [ProdukController::class, 'update']);
+	Route::get('/produk/delete/{id}', [ProdukController::class, 'destroy']);
 
 	Route::resource('pelanggan', PelangganController::class);
 });

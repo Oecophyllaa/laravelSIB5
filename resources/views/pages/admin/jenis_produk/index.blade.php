@@ -37,12 +37,12 @@
             </tfoot>
 
             <tbody>
-              @foreach ($jenis_produk as $jp)
+              @foreach ($jenis_produk as $jenis)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $jp->nama }}</td>
+                  <td>{{ $jenis->nama }}</td>
                   <td>
-                    ubah
+                    <a href="{{ url('admin/jenis-produk/edit/' . $jenis->id) }}" class="btn btn-sm btn-warning">Edit</a>
                   </td>
                 </tr>
               @endforeach
