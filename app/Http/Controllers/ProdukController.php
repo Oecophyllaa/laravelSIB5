@@ -13,11 +13,11 @@ class ProdukController extends Controller
 	 */
 	public function index()
 	{
-		$products = Produk::with('jenis_produk')->get();
+		$produk = Produk::join('jenis_produk', 'jenis_produk_id', '=', 'jenis_produk.id')
+			->select('produk.*', 'jenis_produk.nama as jenis')
+			->get();
 
-		return view('pages.admin.produk.index', [
-			'products' => $products,
-		]);
+		return view('pages.admin.produk.index', compact('produk'));
 	}
 
 	/**
@@ -54,7 +54,12 @@ class ProdukController extends Controller
 	 */
 	public function show(string $id)
 	{
-		//
+		$produk = Produk::join('jenis_produk', 'jenis_produk_id', '=', 'jenis_produk.id')
+			->select('produk.*', 'jenis_produk.nama as jenis')
+			->where('produk.id', $id)
+			->get();
+
+		return view('pages.admin.produk.detail', compact('produk'));
 	}
 
 	/**

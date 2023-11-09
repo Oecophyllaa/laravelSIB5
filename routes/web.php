@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function () {
 	Route::get('/produk', [ProdukController::class, 'index']);
 	Route::get('/produk/create', [ProdukController::class, 'create']);
 	Route::post('/produk/store', [ProdukController::class, 'store']);
+	Route::get('/produk/show/{id}', [ProdukController::class, 'show']);
 
 	Route::resource('pelanggan', PelangganController::class);
 });

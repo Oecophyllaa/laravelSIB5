@@ -6,7 +6,7 @@
   <div class="container-fluid">
 
     <!-- Page Heading -->
-    {{-- <h1 class="h3 mb-2 text-gray-800">DataTabel Produk</h1> --}}
+    <!-- <h1 class="h3 mb-2 text-gray-800">DataTabel Produk</h1> -->
     <p class="mb-4"><a href="{{ route('dashboard.index') }}">Dashboard</a> &LongRightArrow; Produk</p>
 
     <!-- DataTales Example -->
@@ -30,6 +30,7 @@
                 <th>Stok</th>
                 <th>Minimal Stok</th>
                 <th>Jenis Produk</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -43,23 +44,28 @@
                 <th>Stok</th>
                 <th>Minimal Stok</th>
                 <th>Jenis Produk</th>
+                <th>Action</th>
               </tr>
             </tfoot>
 
             <tbody>
-              @foreach ($products as $product)
+              @foreach ($produk as $pr)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $product->kode }}</td>
-                  <td>{{ $product->nama }}</td>
-                  <td>{{ $product->harga_beli }}</td>
-                  <td>{{ $product->harga_jual }}</td>
-                  <td>{{ $product->stok }}</td>
-                  <td>{{ $product->min_stok }}</td>
-                  <td>{{ $product->jenis_produk->nama }}</td>
+                  <td>{{ $pr->kode }}</td>
+                  <td>{{ $pr->nama }}</td>
+                  <td>{{ $pr->harga_beli }}</td>
+                  <td>{{ $pr->harga_jual }}</td>
+                  <td>{{ $pr->stok }}</td>
+                  <td>{{ $pr->min_stok }}</td>
+                  <td>{{ $pr->jenis }}</td>
+                  <td>
+                    <a href="{{ url('admin/produk/show/' . $pr->id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                  </td>
                 </tr>
               @endforeach
             </tbody>
+
           </table>
         </div>
       </div>
