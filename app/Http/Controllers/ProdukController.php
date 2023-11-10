@@ -35,6 +35,14 @@ class ProdukController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		// proses upload foto
+		if (!empty($request->foto)) {
+			$fileName = 'foto-' . uniqid() . '.' . $request->foto->extension();
+			$request->foto->move(public_path('backend/img'), $fileName);
+		} else {
+			$fileName = '';
+		}
+
 		// tambah data menggunakan query builder
 		DB::table('produk')->insert([
 			'kode' => $request->kode,
@@ -43,6 +51,8 @@ class ProdukController extends Controller
 			'harga_jual' => $request->harga_jual,
 			'stok' => $request->stok,
 			'min_stok' => $request->min_stok,
+			'foto' => $fileName,
+			'deskripsi' => $request->deskripsi,
 			'jenis_produk_id' => $request->jenis_produk_id,
 		]);
 
@@ -78,6 +88,18 @@ class ProdukController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
+		$produk = DB::table('produk')->where('id', $id)->first();
+		// dd($produk);
+		$namaFileFotoLama = $produk->foto;
+
+		if (!empty($request->foto)) {
+			// jika ada foto lama maka hapus fotonya
+			if (!empty($namaFileFotoLama)) unlink('backend/img/' . $namaFileFotoLama);
+			// proses ganti foto
+			$fileName = 'foto-' . uniqid() . '.' . $request->foto->extension();
+			$request->foto->move(public_path('backend/img'), $fileName);
+		}
+
 		DB::table('produk')->where('id', $id)->update([
 			'kode' => $request->kode,
 			'nama' => $request->nama,
@@ -85,6 +107,8 @@ class ProdukController extends Controller
 			'harga_jual' => $request->harga_jual,
 			'stok' => $request->stok,
 			'min_stok' => $request->min_stok,
+			'foto' => $fileName,
+			'deskripsi' => $request->deskripsi,
 			'jenis_produk_id' => $request->jenis_produk_id,
 		]);
 

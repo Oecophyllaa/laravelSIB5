@@ -52,6 +52,23 @@
         </div>
 
         <div class="form-group row">
+          <label for="foto" class="col-2 col-form-label text-right">Foto</label>
+          <div class="col-8">
+            <input type="file" id="foto" name="foto" class="form-control mb-2" />
+            @if (!empty($pr->foto))
+              <img width="100" src="{{ asset('backend/img/' . $pr->foto) }}" alt="foto"> <br>
+            @endif
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="deskripsi" class="col-2 col-form-label text-right">Deskripsi</label>
+          <div class="col-8">
+            <textarea id="deskripsi" name="deskripsi" cols="40" rows="5" class="form-control">{{ $pr->deskripsi }}</textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
           <label for="select" class="col-2 col-form-label text-right">Jenis Porduk</label>
           <div class="col-8">
             <select id="select" name="jenis_produk_id" class="custom-select">
