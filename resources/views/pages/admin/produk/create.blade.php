@@ -4,55 +4,90 @@
 
 @section('content')
   <div class="container-fluid">
+    <!-- ./error-handling -->
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
     <form method="POST" action="{{ url('admin/produk/store') }}" enctype="multipart/form-data">
       @csrf
 
       <div class="form-group row">
         <label for="kode" class="col-2 col-form-label text-right">Kode</label>
         <div class="col-8">
-          <input type="text" id="kode" name="kode" class="form-control" />
+          <input type="text" id="kode" name="kode" value="{{ old('kode') }}" class="form-control @error('kode') is-invalid @enderror" />
+          @error('kode')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nama" class="col-2 col-form-label text-right">Nama</label>
         <div class="col-8">
-          <input type="text" id="nama" name="nama" class="form-control" />
+          <input type="text" id="nama" name="nama" value="{{ old('nama') }}" class="form-control @error('nama') is-invalid @enderror" />
+          @error('nama')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
       </div>
 
       <div class="form-group row">
         <label for="harga_beli" class="col-2 col-form-label text-right">Harga Beli</label>
         <div class="col-8">
-          <input type="text" id="harga_beli" name="harga_beli" class="form-control" />
+          <input type="text" id="harga_beli" name="harga_beli" value="{{ old('harga_beli') }}"
+            class="form-control @error('harga_beli') is-invalid @enderror" />
+          @error('harga_beli')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
       </div>
 
       <div class="form-group row">
         <label for="harga_jual" class="col-2 col-form-label text-right">Harga Jual</label>
         <div class="col-8">
-          <input type="text" id="harga_jual" name="harga_jual" class="form-control" />
+          <input type="text" id="harga_jual" name="harga_jual" value="{{ old('harga_jual') }}"
+            class="form-control @error('harga_jual') is-invalid @enderror" />
+          @error('harga_jual')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
       </div>
 
       <div class="form-group row">
         <label for="stok" class="col-2 col-form-label text-right">Stok</label>
         <div class="col-8">
-          <input type="text" id="stok" name="stok" class="form-control" />
+          <input type="text" id="stok" name="stok" value="{{ old('stok') }}" class="form-control @error('stok') is-invalid @enderror" />
+          @error('stok')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
       </div>
 
       <div class="form-group row">
         <label for="min_stok" class="col-2 col-form-label text-right">Minimal Stok</label>
         <div class="col-8">
-          <input type="text" id="min_stok" name="min_stok" class="form-control" />
+          <input type="text" id="min_stok" name="min_stok" value="{{ old('min_stok') }}"
+            class="form-control @error('min_stok') is-invalid @enderror" />
+          @error('min_stok')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
       </div>
 
       <div class="form-group row">
         <label for="foto" class="col-2 col-form-label text-right">Foto</label>
         <div class="col-8">
-          <input type="file" id="foto" name="foto" class="form-control" />
+          <input type="file" id="foto" name="foto" class="form-control @error('foto') is-invalid @enderror" />
+          @error('foto')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
       </div>
 
@@ -66,11 +101,16 @@
       <div class="form-group row">
         <label for="select" class="col-2 col-form-label text-right">Jenis Porduk</label>
         <div class="col-8">
-          <select id="select" name="jenis_produk_id" class="custom-select">
+          <select id="select" name="jenis_produk_id" class="custom-select @error('jenis_produk_id') is-invalid @enderror">
             @foreach ($jenis_produk as $jenis)
               <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
             @endforeach
           </select>
+          @error('jenis_produk_id')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
         </div>
       </div>
 

@@ -35,6 +35,40 @@ class ProdukController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		// validasi
+		$request->validate(
+			[
+				'kode' => 'required|unique:produk|max:10',
+				'nama' => 'required|max:45',
+				'harga_beli' => 'required|numeric',
+				'harga_jual' => 'required|numeric',
+				'stok' => 'required|integer',
+				'min_stok' => 'required|integer',
+				'foto' => 'nullable|image|mimes:jpg,jpeg,gif,png,svg|max:2048',
+				'deskripsi' => 'nullable|string|min:10',
+				'jenis_produk_id' => 'required|integer',
+			],
+			[
+				'kode.required' => 'Kode Wajib Diisi',
+				'kode.max' => 'Kode maksimal 10 karakter',
+				'kode.unique' => 'Kode sudah terisi silahkan tambahkan kode lain',
+
+				'nama.required' => 'Nama wajib diisi',
+				'nama.max' => 'Nama maksimal 45 karakter',
+
+				'harga_beli.required' => 'Harga beli harus diisi',
+				'harga_beli.numeric' => 'Harga beli harus berupa angka',
+
+				'harga_jual.required' => 'Harga jual harus diisi',
+				'harga_jual.numeric' => 'Harga jual harus berupa angka',
+
+				'stok.required' => 'Stok harus diisi',
+				'min_stok.required' => 'Minimal stok harus diisi',
+				'foto.max' => 'Maksimal 2 MB',
+				'foto.image' => 'File ekstensi harus jpg,jpeg,gif,png,svg',
+			]
+		);
+
 		// proses upload foto
 		if (!empty($request->foto)) {
 			$fileName = 'foto-' . uniqid() . '.' . $request->foto->extension();
@@ -88,9 +122,35 @@ class ProdukController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
+		$request->validate(
+			[
+				'nama' => 'required|max:45',
+				'harga_beli' => 'required|numeric',
+				'harga_jual' => 'required|numeric',
+				'stok' => 'required|numeric',
+				'min_stok' => 'required|numeric',
+				'foto' => 'nullable|image|mimes:jpg,jpeg,gif,png,svg|max:2048',
+				'deksripsi' => 'nullable|string|min:10',
+				'jenis_produk_id' => 'required|integer',
+			],
+			[
+				'nama.required' => 'Nama wajib diisi',
+				'nama.max' => 'Nama maksimal 45 karakter',
+				'harga_beli.required' => 'Harga beli Harus diisi',
+				'harga_beli.numeric' => 'Harus Angka',
+				'harga_jual.required' => 'Harga jual harus disii',
+				'harga_jual.numeric' => 'harus angka',
+				'stok.required' => 'Stok harus diisi',
+				'min_stok.required' => 'Minimal stok harus terisi',
+				'foto.max' => 'Maksimal 2 MB',
+				'foto.image' => 'File ekstensi harus jpg,jpeg, png, gif, svg',
+			]
+		);
+
 		$produk = DB::table('produk')->where('id', $id)->first();
 		// dd($produk);
 		$namaFileFotoLama = $produk->foto;
+		$fileName = $namaFileFotoLama;
 
 		if (!empty($request->foto)) {
 			// jika ada foto lama maka hapus fotonya

@@ -4,6 +4,16 @@
 
 @section('content')
   <div class="container-fluid">
+    <!-- ./error-handling -->
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
 
     @foreach ($produk as $pr)
       <form method="POST" action="{{ url('admin/produk/update/' . $pr->id) }}" enctype="multipart/form-data">
@@ -12,14 +22,20 @@
         <div class="form-group row">
           <label for="kode" class="col-2 col-form-label text-right">Kode</label>
           <div class="col-8">
-            <input type="text" id="kode" name="kode" value="{{ $pr->kode }}" class="form-control" />
+            <input type="text" id="kode" name="kode" value="{{ $pr->kode }}" class="form-control @error('kode') is-invalid @enderror" />
           </div>
+          @error('kode')
+            <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
         </div>
 
         <div class="form-group row">
           <label for="nama" class="col-2 col-form-label text-right">Nama</label>
           <div class="col-8">
-            <input type="text" id="nama" name="nama" value="{{ $pr->nama }}" class="form-control" />
+            <input type="text" id="nama" name="nama" value="{{ $pr->nama }}" class="form-control @error('nama') is-invalid @enderror" />
+            @error('nama')
+              <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
           </div>
         </div>
 

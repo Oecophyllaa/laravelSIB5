@@ -7,6 +7,7 @@ use App\Http\Controllers\LihatNilaiController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProdukController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,19 +60,19 @@ Route::prefix('admin')->group(function () {
 	Route::resource('kartu', KartuController::class);
 
 	// memanggil fungsi satu persatu
-	Route::get('/jenis-produk', [JenisProdukController::class, 'index']);
-	Route::get('/jenis-produk/create', [JenisProdukController::class, 'create']);
-	Route::post('/jenis-produk/store', [JenisProdukController::class, 'store']);
-	Route::get('/jenis-produk/edit/{id}', [JenisProdukController::class, 'edit']);
-	Route::post('/jenis-produk/update/{id}', [JenisProdukController::class, 'update']);
+	Route::get('/jenis-produk', [JenisProdukController::class, 'index'])->name('produk.index');
+	Route::get('/jenis-produk/create', [JenisProdukController::class, 'create'])->name('produk.create');
+	Route::post('/jenis-produk/store', [JenisProdukController::class, 'store'])->name('produk.store');
+	Route::get('/jenis-produk/edit/{id}', [JenisProdukController::class, 'edit'])->name('produk.edit');
+	Route::post('/jenis-produk/update/{id}', [JenisProdukController::class, 'update'])->name('produk.update');
 
-	Route::get('/produk', [ProdukController::class, 'index']);
-	Route::get('/produk/create', [ProdukController::class, 'create']);
-	Route::post('/produk/store', [ProdukController::class, 'store']);
-	Route::get('/produk/show/{id}', [ProdukController::class, 'show']);
-	Route::get('/produk/edit/{id}', [ProdukController::class, 'edit']);
-	Route::post('/produk/update/{id}', [ProdukController::class, 'update']);
-	Route::get('/produk/delete/{id}', [ProdukController::class, 'destroy']);
+	Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+	Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
+	Route::post('/produk/store', [ProdukController::class, 'store'])->name('produk.store');
+	Route::get('/produk/show/{id}', [ProdukController::class, 'show'])->name('produk.show');
+	Route::get('/produk/edit/{id}', [ProdukController::class, 'edit'])->name('produk.edit');
+	Route::post('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
+	Route::get('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
 	Route::resource('pelanggan', PelangganController::class);
 });
