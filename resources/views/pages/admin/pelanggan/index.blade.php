@@ -29,6 +29,7 @@
                 <th>Tanggal Lahir</th>
                 <th>Email</th>
                 <th>Kartu</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -42,6 +43,7 @@
                 <th>Tanggal Lahir</th>
                 <th>Email</th>
                 <th>Kartu</th>
+                <th>Action</th>
               </tr>
             </tfoot>
 
@@ -56,6 +58,18 @@
                   <td>{{ $cust->tgl_lahir }}</td>
                   <td>{{ $cust->email }}</td>
                   <td>{{ $cust->kartu->nama }}</td>
+                  <td>
+                    <!-- ./edit-btn -->
+                    <a href="{{ route('pelanggan.edit', $cust->id) }}" class="btn btn-sm btn-warning">
+                      <i class="fas fa-edit"></i>
+                    </a>
+
+                    <!-- ./delete-btn -->
+                    <a href="{{ route('pelanggan.destroy', $cust->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true">
+                      <i class="fas fa-trash" data-confirm-delete="true"></i>
+                    </a>
+
+                  </td>
                 </tr>
               @endforeach
             </tbody>

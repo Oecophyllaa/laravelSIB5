@@ -18,6 +18,7 @@ class DashboardController extends Controller
 			->groupBy('jk')
 			->get();
 		// dd(json_encode($jenis_kelamin));
+		$hitung_harga = DB::table('produk')->select('nama', 'harga_jual')->get();
 
 		return view('pages.admin.dashboard', [
 			'produk' => Produk::count(),
@@ -25,6 +26,7 @@ class DashboardController extends Controller
 			'pelanggan' => Pelanggan::count(),
 			'kartu' => Kartu::count(),
 			'jenis_kelamin' => $jenis_kelamin,
+			'hitung_harga' => $hitung_harga
 		]);
 	}
 }

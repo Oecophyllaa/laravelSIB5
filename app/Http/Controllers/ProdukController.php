@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdukController extends Controller
 {
@@ -90,7 +91,8 @@ class ProdukController extends Controller
 			'jenis_produk_id' => $request->jenis_produk_id,
 		]);
 
-		return redirect('admin/produk');
+		// Alert::success('Success', 'Berhasil menambahkan produk');
+		return redirect('admin/produk')->with('success', 'Produk Berhasil ditambahkan!');
 	}
 
 	/**
@@ -172,7 +174,8 @@ class ProdukController extends Controller
 			'jenis_produk_id' => $request->jenis_produk_id,
 		]);
 
-		return redirect('admin/produk');
+		// Alert::success('Produk', 'Berhasil mengupdate produk');
+		return redirect('admin/produk')->with('success', 'Produk berhasil diupdate');
 	}
 
 	/**
@@ -181,6 +184,8 @@ class ProdukController extends Controller
 	public function destroy(string $id)
 	{
 		DB::table('produk')->where('id', $id)->delete();
-		return redirect('admin/produk');
+
+		// Alert::error('Produk', 'Berhasil menghapus');
+		return redirect('admin/produk')->withSuccess('Berhasil Menghapus Data Produk!');
 	}
 }

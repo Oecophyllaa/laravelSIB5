@@ -36,6 +36,8 @@ class JenisProdukController extends Controller
 		$jenis_produk->nama = $request->nama;
 		$jenis_produk->save();
 
+		// alert('Success', 'Jenis produk berhasil ditambahkan', 'success');
+		// alert()->success('Success', 'Jenis produk berhasil ditambahkan');
 		return redirect('admin/jenis-produk');
 	}
 
@@ -65,7 +67,7 @@ class JenisProdukController extends Controller
 		$jenis_produk->nama = $request->nama;
 		$jenis_produk->save();
 
-		return redirect('admin/jenis-produk');
+		return redirect('admin/jenis-produk')->with('success', 'jenis produk berhasil diupdate');
 	}
 
 	/**

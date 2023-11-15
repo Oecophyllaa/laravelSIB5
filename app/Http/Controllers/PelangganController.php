@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kartu;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PelangganController extends Controller
 {
@@ -14,6 +15,10 @@ class PelangganController extends Controller
 	public function index()
 	{
 		$pelanggan = Pelanggan::all();
+
+		$title = 'Hapus pelanggan!';
+		$text = "Are you sure you want to delete?";
+		confirmDelete($title, $text);
 
 		return view('pages.admin.pelanggan.index', [
 			'pelanggan' => $pelanggan,
@@ -46,6 +51,7 @@ class PelangganController extends Controller
 		$pelanggan->kartu_id = $request->kartu_id;
 		$pelanggan->save();
 
+		Alert::success('Pelanggan', 'Berhasil menambahkan pelanggan');
 		return redirect('admin/pelanggan');
 	}
 
@@ -62,7 +68,11 @@ class PelangganController extends Controller
 	 */
 	public function edit(string $id)
 	{
-		//
+		$pelanggan = Pelanggan::whereId($id)->firstOrFail();
+		$kartu = Kartu::all();
+		$gender = ['L', 'P'];
+
+		return view('pages.admin.pelanggan.edit', compact('pelanggan', 'kartu', 'gender'));
 	}
 
 	/**
@@ -70,7 +80,17 @@ class PelangganController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
-		//
+		$pelanggan = Pelanggan::whereId($id)->firstOrFail();
+		$pelanggan->kode = $request->kode;
+		$pelanggan->nama = $request->nama;
+		$pelanggan->jk = $request->jk;
+		$pelanggan->tmp_lahir = $request->tmp_lahir;
+		$pelanggan->tgl_lahir = $request->tgl_lahir;
+		$pelanggan->email = $request->email;
+		$pelanggan->kartu_id = $request->kartu_id;
+		$pelanggan->save();
+
+		return redirect()->route('pelanggan.index')->with('success', 'Pelanggan berhasil diupdate');
 	}
 
 	/**
@@ -78,6 +98,12 @@ class PelangganController extends Controller
 	 */
 	public function destroy(string $id)
 	{
-		//
+		$pelanggan = Pelanggan::whereId($id)->firstOrFail();
+		$pelanggan->delete();
+
+		// $title = 'Delete User!';
+		// $text = "Are you sure you want to delete?";
+		// confirmDelete($title, $text);
+		return redirect()->route('pelanggan.index')->with('success', 'Pelanggan berhasil dihapus');
 	}
 }
