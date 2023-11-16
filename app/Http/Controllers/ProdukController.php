@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -187,5 +189,40 @@ class ProdukController extends Controller
 
 		// Alert::error('Produk', 'Berhasil menghapus');
 		return redirect('admin/produk')->withSuccess('Berhasil Menghapus Data Produk!');
+	}
+
+	// PDF Report
+	public function printPDF()
+	{
+		$data = [
+			'title' => 'Welcome to export PDF',
+			'date' => Carbon::now(),
+		];
+
+		$pdf = Pdf::loadView('pages.admin.produk.pdf', $data);
+		return $pdf->download('example.pdf');
+	}
+
+	public function produkPDF()
+	{
+		$produk = Produk::join('jenis_produk', 'jenis_produk_id', '=', 'jenis_produk.id')
+			->select('produk.*', 'jenis_produk.nama as jenis')
+			->get();
+
+		$pdf = Pdf::loadView('pages.admin.produk.pdf2', ['produk' => $produk,])->setPaper('A4', 'landscape');
+
+		return $pdf->stream();
+	}
+
+	public function produkDetailPDF(string $id)
+	{
+		$produk = DB::table('produk')->join('jenis_produk', 'jenis_produk_id', '=', 'jenis_produk.id')
+			->select('produk.*', 'jenis_produk.nama as jenis')
+			->where('produk.id', $id)
+			->first();
+
+		$pdf = Pdf::loadView('pages.admin.produk.pdf3', ['produk' => $produk]);
+
+		return $pdf->stream();
 	}
 }

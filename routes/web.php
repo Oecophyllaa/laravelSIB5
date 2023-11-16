@@ -60,11 +60,11 @@ Route::prefix('admin')->group(function () {
 	Route::resource('kartu', KartuController::class);
 
 	// memanggil fungsi satu persatu
-	Route::get('/jenis-produk', [JenisProdukController::class, 'index'])->name('produk.index');
-	Route::get('/jenis-produk/create', [JenisProdukController::class, 'create'])->name('produk.create');
-	Route::post('/jenis-produk/store', [JenisProdukController::class, 'store'])->name('produk.store');
-	Route::get('/jenis-produk/edit/{id}', [JenisProdukController::class, 'edit'])->name('produk.edit');
-	Route::post('/jenis-produk/update/{id}', [JenisProdukController::class, 'update'])->name('produk.update');
+	Route::get('/jenis-produk', [JenisProdukController::class, 'index'])->name('jenis.index');
+	Route::get('/jenis-produk/create', [JenisProdukController::class, 'create'])->name('jenis.create');
+	Route::post('/jenis-produk/store', [JenisProdukController::class, 'store'])->name('jenis.store');
+	Route::get('/jenis-produk/edit/{id}', [JenisProdukController::class, 'edit'])->name('jenis.edit');
+	Route::post('/jenis-produk/update/{id}', [JenisProdukController::class, 'update'])->name('jenis.update');
 
 	Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
 	Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
@@ -73,6 +73,9 @@ Route::prefix('admin')->group(function () {
 	Route::get('/produk/edit/{id}', [ProdukController::class, 'edit'])->name('produk.edit');
 	Route::post('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
 	Route::get('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+	Route::get('/produk/download-pdf/', [ProdukController::class, 'printPDF'])->name('produk.download.pdf');
+	Route::get('/produk/stream-pdf/', [ProdukController::class, 'produkPDF'])->name('produk.stream.pdf');
+	Route::get('/produk/stream-pdf/{id}', [ProdukController::class, 'produkDetailPDF'])->name('produk.detail.stream.pdf');
 
 	Route::resource('pelanggan', PelangganController::class);
 });

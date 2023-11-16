@@ -5,3 +5,4 @@
 <!-- Custom styles for this template-->
 <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet">

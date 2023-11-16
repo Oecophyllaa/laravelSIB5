@@ -15,6 +15,9 @@
         <a href="{{ url('admin/jenis-produk/create') }}" class="btn btn-primary">
           <i class="fas fa-plus"></i>
         </a>
+        <a href="#" class="btn btn-danger">
+          <i class="fas fa-file-pdf"></i>
+        </a>
       </div>
 
       <div class="card-body">
@@ -58,4 +61,16 @@
 @push('after-script')
   <!-- Page level custom scripts -->
   <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
+
+  <!-- datatables addition -->
+  <script>
+    $(document).ready(function() {
+      $('#dataTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+      });
+    });
+  </script>
 @endpush

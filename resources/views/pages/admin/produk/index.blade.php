@@ -15,6 +15,9 @@
         <a href="{{ url('admin/produk/create') }}" class="btn btn-primary">
           <i class="fas fa-plus"></i>
         </a>
+        <a href="{{ route('produk.stream.pdf') }}" target="_blank" class="btn btn-danger">
+          <i class="fas fa-file-pdf"></i>
+        </a>
       </div>
 
       <div class="card-body">
@@ -61,6 +64,7 @@
                   <td>{{ $pr->jenis }}</td>
                   <td>
                     <a href="{{ url('admin/produk/show/' . $pr->id) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                    <a href="{{ route('produk.detail.stream.pdf', $pr->id) }}" class="btn btn-sm btn-success"><i class="fas fa-file-pdf"></i></a>
                     <a href="{{ url('admin/produk/edit/' . $pr->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
 
                     <!-- Button trigger modal -->
