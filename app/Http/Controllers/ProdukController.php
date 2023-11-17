@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProdukExport;
 use App\Models\Produk;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Imports\ProdukImport;
 
 class ProdukController extends Controller
 {
@@ -191,7 +194,7 @@ class ProdukController extends Controller
 		return redirect('admin/produk')->withSuccess('Berhasil Menghapus Data Produk!');
 	}
 
-	// PDF Report
+	// PDF Export
 	public function printPDF()
 	{
 		$data = [
@@ -224,5 +227,21 @@ class ProdukController extends Controller
 		$pdf = Pdf::loadView('pages.admin.produk.pdf3', ['produk' => $produk]);
 
 		return $pdf->stream();
+	}
+
+	// Excel Import / Export
+	public function exportToExcel()
+	{
+		return Excel::download(new ProdukExport, 'produk.xlsx');
+	}
+
+	public function importExcel(Request $request)
+	{
+		$file = $request->file('file');
+		$nama_file = rand() . $file->getClientOriginalName();
+		$file->move('file_excel', $nama_file);
+		Excel::import(new ProdukImport, public_path('/file_excel' . $nama_file));
+
+		return redirect('admin/produk')->with('success', 'All good!');
 	}
 }

@@ -73,9 +73,16 @@ Route::prefix('admin')->group(function () {
 	Route::get('/produk/edit/{id}', [ProdukController::class, 'edit'])->name('produk.edit');
 	Route::post('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
 	Route::get('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+
+	// produk PDF
 	Route::get('/produk/download-pdf/', [ProdukController::class, 'printPDF'])->name('produk.download.pdf');
 	Route::get('/produk/stream-pdf/', [ProdukController::class, 'produkPDF'])->name('produk.stream.pdf');
 	Route::get('/produk/stream-pdf/{id}', [ProdukController::class, 'produkDetailPDF'])->name('produk.detail.stream.pdf');
+
+	// produk Excel
+	Route::get('/produk/download-excel/', [ProdukController::class, 'exportToExcel'])->name('produk.download.excel');
+	Route::post('/produk/import-excel/', [ProdukController::class, 'importExcel'])->name('produk.import.excel');
+
 
 	Route::resource('pelanggan', PelangganController::class);
 });
