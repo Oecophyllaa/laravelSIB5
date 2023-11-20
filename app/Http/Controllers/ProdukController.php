@@ -129,6 +129,7 @@ class ProdukController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
+		// Validasi Update
 		$request->validate(
 			[
 				'nama' => 'required|max:45',

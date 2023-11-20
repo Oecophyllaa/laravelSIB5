@@ -80,15 +80,18 @@ class PelangganController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
+		// masih belum jalan, action update
 		$pelanggan = Pelanggan::whereId($id)->firstOrFail();
-		$pelanggan->kode = $request->kode;
-		$pelanggan->nama = $request->nama;
-		$pelanggan->jk = $request->jk;
-		$pelanggan->tmp_lahir = $request->tmp_lahir;
-		$pelanggan->tgl_lahir = $request->tgl_lahir;
-		$pelanggan->email = $request->email;
-		$pelanggan->kartu_id = $request->kartu_id;
-		$pelanggan->save();
+
+		$pelanggan->update([
+			'kode' => $request->kode,
+			'nama' => $request->nama,
+			'jk' => $request->jk,
+			'tmp_lahir' => $request->tmp_lahir,
+			'tgl_lahir' => $request->tgl_lahir,
+			'email' => $request->email,
+			'kartu_id' => $request->kartu_id,
+		]);
 
 		return redirect()->route('pelanggan.index')->with('success', 'Pelanggan berhasil diupdate');
 	}
