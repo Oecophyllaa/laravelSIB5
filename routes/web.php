@@ -8,6 +8,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProdukController;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,3 +87,7 @@ Route::prefix('admin')->group(function () {
 
 	Route::resource('pelanggan', PelangganController::class);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
