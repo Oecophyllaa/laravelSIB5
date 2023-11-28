@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 	return view('welcome');
-});
+})->name('front.index');
 
 Route::get('/salam', function () {
 	return "Halo Cuy, mari belajar Laravel 10";
@@ -51,14 +51,20 @@ Route::get('/daftarnilai', function () {
 // routing manggil dari class controller
 Route::get('/datamahasiswa', [LihatNilaiController::class, 'dataMahasiswa']);
 
-Route::prefix('admin')->group(function () {
+// ADMIN ROUTE GROUP
+Route::prefix('admin')->middleware(['auth', 'check_role:admin-manager-staff-pelanggan'])->group(function () {
+
+	// Dashboard
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
 
 	// contoh pemanggilan secara satu persatu function menggunakan get, put, update, delete
 	Route::get('/404', [PageController::class, 'index'])->name('page.notfound');
 
+
 	// memanggil seluruh fungsi atau function menggunakan resource
 	Route::resource('kartu', KartuController::class);
+
 
 	// memanggil fungsi satu persatu
 	Route::get('/jenis-produk', [JenisProdukController::class, 'index'])->name('jenis.index');
@@ -66,6 +72,7 @@ Route::prefix('admin')->group(function () {
 	Route::post('/jenis-produk/store', [JenisProdukController::class, 'store'])->name('jenis.store');
 	Route::get('/jenis-produk/edit/{id}', [JenisProdukController::class, 'edit'])->name('jenis.edit');
 	Route::post('/jenis-produk/update/{id}', [JenisProdukController::class, 'update'])->name('jenis.update');
+
 
 	Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
 	Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
@@ -75,10 +82,12 @@ Route::prefix('admin')->group(function () {
 	Route::post('/produk/update/{id}', [ProdukController::class, 'update'])->name('produk.update');
 	Route::get('/produk/delete/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
+
 	// produk PDF
 	Route::get('/produk/download-pdf/', [ProdukController::class, 'printPDF'])->name('produk.download.pdf');
 	Route::get('/produk/stream-pdf/', [ProdukController::class, 'produkPDF'])->name('produk.stream.pdf');
 	Route::get('/produk/stream-pdf/{id}', [ProdukController::class, 'produkDetailPDF'])->name('produk.detail.stream.pdf');
+
 
 	// produk Excel
 	Route::get('/produk/download-excel/', [ProdukController::class, 'exportToExcel'])->name('produk.download.excel');
@@ -88,6 +97,8 @@ Route::prefix('admin')->group(function () {
 	Route::resource('pelanggan', PelangganController::class);
 });
 
+
 Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
