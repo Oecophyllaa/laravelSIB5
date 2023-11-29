@@ -62,6 +62,22 @@
   </li>
 
   <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    User Management
+  </div>
+
+  <!-- Nav Item - Utilities Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('users.index') }}">
+      <i class="fas fa-fw fa-chart-area"></i>
+      <span>Data User</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 
   <!-- Sidebar Toggler (Sidebar) -->

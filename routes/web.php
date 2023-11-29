@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisProdukController;
 use App\Http\Controllers\KartuController;
@@ -7,7 +8,7 @@ use App\Http\Controllers\LihatNilaiController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProdukController;
-
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-})->name('front.index');
+// Route::get('/', function () {
+// 	return view('welcome');
+// })->name('front.index');
+
+Route::get('/', [BerandaController::class, 'index'])->name('front.index');
 
 Route::get('/salam', function () {
 	return "Halo Cuy, mari belajar Laravel 10";
@@ -95,6 +98,9 @@ Route::prefix('admin')->middleware(['auth', 'check_role:admin-manager-staff-pela
 
 
 	Route::resource('pelanggan', PelangganController::class);
+
+
+	Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
 
 
