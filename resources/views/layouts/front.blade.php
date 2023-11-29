@@ -4,7 +4,7 @@
 <head>
   @include('includes.front.meta')
 
-  <title>FrontEnd - {{ config('app.name') }} </title>
+  <title> Aplikasi Toko </title>
 
   @stack('before-style')
   @include('includes.front.style')

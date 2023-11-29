@@ -3,6 +3,7 @@
 @section('title', 'Detail Profile')
 
 @section('content')
+
   @if (Auth::user()->role == 'admin')
     <div class="container-fluid">
 
@@ -61,4 +62,5 @@
   @else
     @include('pages.admin.404')
   @endif
+
 @endsection
