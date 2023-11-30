@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class BerandaController extends Controller
 {
 	public function index()
 	{
-		return view('pages.front.index');
+		$produk = Produk::where('jenis_produk_id', 4)->get();
+
+		return view('pages.front.index', compact('produk'));
 	}
 }

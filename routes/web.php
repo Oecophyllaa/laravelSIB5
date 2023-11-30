@@ -101,6 +101,8 @@ Route::prefix('admin')->middleware(['auth', 'check_role:admin-manager-staff-pela
 
 
 	Route::get('/users', [UserController::class, 'index'])->name('users.index');
+	Route::get('/profile', [UserController::class, 'show'])->name('users.profile');
+	Route::patch('/profile/{id}', [UserController::class, 'update'])->name('users.update');
 });
 
 
