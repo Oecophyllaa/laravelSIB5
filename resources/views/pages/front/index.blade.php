@@ -10,7 +10,7 @@
             <h1>Modern Interior <span clsas="d-block">Design Studio</span></h1>
             <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor
               tristique.</p>
-            <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+            <p><a href="{{ route('front.shop') }}" class="btn btn-secondary me-2">Shop Now</a></p>
           </div>
         </div>
         <div class="col-lg-7">
@@ -23,44 +23,46 @@
   </div>
   <!-- End Hero Section -->
 
-  <!-- Start Product Section -->
-  <div class="product-section">
-    <div class="container">
-      <div class="row">
+  @auth
+    <!-- Start Product Section -->
+    <div class="product-section">
+      <div class="container">
+        <div class="row">
 
-        <!-- Start Column 1 -->
-        <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-          <h2 class="mb-4 section-title">Crafted with excellent material.</h2>
-          <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor
-            tristique. </p>
-          <p><a href="shop.html" class="btn">Explore</a></p>
-        </div>
-        <!-- End Column 1 -->
-
-        @foreach ($produk as $produk)
-          <!-- Start Column 2 -->
-          <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-            <a class="product-item" href="cart.html">
-              @empty($produk->foto)
-                <img src="{{ asset('backend/img/placeholder.jpg') }}" class="img-fluid product-thumbnail">
-              @else
-                <img src="{{ asset('backend/img/' . $produk->foto) }}" class="img-fluid product-thumbnail">
-              @endempty
-              <h3 class="product-title">{{ $produk->nama }}</h3>
-              <strong class="product-price">Rp. {{ $produk->harga_jual }}</strong>
-
-              <span class="icon-cross">
-                <img src="{{ asset('frontend/images/cross.svg') }}" class="img-fluid">
-              </span>
-            </a>
+          <!-- Start Column 1 -->
+          <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+            <h2 class="mb-4 section-title">Crafted with excellent material.</h2>
+            <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor
+              tristique. </p>
+            <p><a href="{{ route('front.shop') }}" class="btn">Explore</a></p>
           </div>
-          <!-- End Column 2 -->
-        @endforeach
+          <!-- End Column 1 -->
 
+          @foreach ($produk as $produk)
+            <!-- Start Column 2 - 4 -->
+            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+              <a class="product-item" href="cart.html">
+                @empty($produk->foto)
+                  <img src="{{ asset('backend/img/placeholder.jpg') }}" class="img-fluid product-thumbnail">
+                @else
+                  <img src="{{ asset('backend/img/' . $produk->foto) }}" class="img-fluid product-thumbnail">
+                @endempty
+                <h3 class="product-title">{{ $produk->nama }}</h3>
+                <strong class="product-price">Rp{{ number_format($produk->harga_jual, 0, ',', '.') }}</strong>
+
+                <span class="icon-cross">
+                  <img src="{{ asset('frontend/images/cross.svg') }}" class="img-fluid">
+                </span>
+              </a>
+            </div>
+            <!-- End Column 2 - 4 -->
+          @endforeach
+
+        </div>
       </div>
     </div>
-  </div>
-  <!-- End Product Section -->
+    <!-- End Product Section -->
+  @endauth
 
   <!-- Start Why Choose Us Section -->
   <div class="why-choose-section">

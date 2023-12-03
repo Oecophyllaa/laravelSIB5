@@ -8,6 +8,7 @@ use App\Http\Controllers\LihatNilaiController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +24,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-// 	return view('welcome');
-// })->name('front.index');
-
+// FRONT LANDING - INDEX
 Route::get('/', [BerandaController::class, 'index'])->name('front.index');
+Route::get('/shop', [ShopController::class, 'index'])->name('front.shop');
+
+Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
+Route::get('/add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('/update-cart', [ShopController::class, 'update'])->name('update.cart');
+Route::delete('/remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
+
+
+
 
 Route::get('/salam', function () {
 	return "Halo Cuy, mari belajar Laravel 10";
@@ -55,7 +62,7 @@ Route::get('/daftarnilai', function () {
 Route::get('/datamahasiswa', [LihatNilaiController::class, 'dataMahasiswa']);
 
 // ADMIN ROUTE GROUP
-Route::prefix('admin')->middleware(['auth', 'check_role:admin-manager-staff-pelanggan'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'check_role:admin-manager-staff'])->group(function () {
 
 	// Dashboard
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
