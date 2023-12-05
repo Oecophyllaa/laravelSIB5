@@ -41,7 +41,7 @@
           @foreach ($produk as $produk)
             <!-- Start Column 2 - 4 -->
             <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-              <a class="product-item" href="cart.html">
+              <a class="product-item" href="{{ route('add.to.cart', $produk->id) }}">
                 @empty($produk->foto)
                   <img src="{{ asset('backend/img/placeholder.jpg') }}" class="img-fluid product-thumbnail">
                 @else

@@ -35,7 +35,7 @@
                 <strong class="product-price">Rp{{ number_format($produk->harga_jual, 0, ',', '.') }}</strong>
 
                 <span class="icon-cross">
-                  <img src="images/cross.svg" class="img-fluid" />
+                  <img src="{{ asset('frontend/images/cross.svg') }}" class="img-fluid" />
                 </span>
               </a>
             </div>

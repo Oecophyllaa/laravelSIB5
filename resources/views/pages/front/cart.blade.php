@@ -40,7 +40,7 @@
                   @empty($details['foto'])
                     <img src="{{ asset('backend/img/placeholder.jpg') }}" width="100" height="100" class="img-responsive" />
                   @else
-                    <img src="{{ asset('backend/img/' . $produk->foto) }}" width="100" height="100" class="img-responsive" />
+                    <img src="{{ asset('backend/img/' . $details['foto']) }}" width="100" height="100" class="img-responsive" />
                   @endempty
                 </div>
                 <div class="col-sm-9">
@@ -69,7 +69,7 @@
       <tr>
         <td colspan="5" class="text-right">
           <a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
-          <button class="btn btn-success">Checkout</button>
+          <button class="btn btn-success" id="pay-button">Checkout</button>
         </td>
       </tr>
     </tfoot>
@@ -115,6 +115,37 @@
           }
         });
       }
+    });
+  </script>
+@endpush
+
+@push('after-script')
+  <script type="text/javascript">
+    // For example trigger on button clicked, or any time you need
+    var payButton = document.getElementById('pay-button');
+    payButton.addEventListener('click', function() {
+      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+      window.snap.pay('{{ $snapToken }}', {
+        onSuccess: function(result) {
+          /* You may add your own implementation here */
+          alert("payment success!");
+          console.log(result);
+        },
+        onPending: function(result) {
+          /* You may add your own implementation here */
+          alert("wating your payment!");
+          console.log(result);
+        },
+        onError: function(result) {
+          /* You may add your own implementation here */
+          alert("payment failed!");
+          console.log(result);
+        },
+        onClose: function() {
+          /* You may add your own implementation here */
+          alert('you closed the popup without finishing the payment');
+        }
+      })
     });
   </script>
 @endpush
