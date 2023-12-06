@@ -245,4 +245,33 @@ class ProdukController extends Controller
 
 		return redirect('admin/produk')->with('success', 'All good!');
 	}
+
+	public function apiProduk()
+	{
+		$produk = Produk::all();
+
+		return response()->json([
+			'success' => true,
+			'message' => 'Data Produk',
+			'data' => $produk,
+		], 200);
+	}
+
+	public function apiProdukDetail($id)
+	{
+		$produk = Produk::find($id);
+
+		if ($produk) {
+			return response()->json([
+				'success' => true,
+				'message' => 'Detail Produk',
+				'data' => $produk,
+			], 200);
+		} else {
+			return response()->json([
+				'success' => false,
+				'message' => 'Detail Produk Tidak Ditemukan',
+			], 404);
+		}
+	}
 }

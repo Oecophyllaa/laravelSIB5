@@ -34,6 +34,11 @@ Route::patch('/update-cart', [ShopController::class, 'update'])->name('update.ca
 Route::delete('/remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
 
 
+// ROUTE SEMENTARA API PRODUK
+Route::get('/api-produk', [ProdukController::class, 'apiProduk']);
+Route::get('/api-produk/{id}', [ProdukController::class, 'apiProdukDetail']);
+
+
 
 
 Route::get('/salam', function () {
