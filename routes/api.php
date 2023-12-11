@@ -22,3 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 // PRODUK
 Route::get('/produk', [ProdukController::class, 'index']);
+Route::get('/produk/{id}', [ProdukController::class, 'show']);
+Route::post('/produk-create', [ProdukController::class, 'store']);
+Route::put('/produk/{id}', [ProdukController::class, 'update']);
+Route::delete('/produk/{id}', [ProdukController::class, 'destroy']);
